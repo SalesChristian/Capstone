@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nachrichten</title>
+    <link rel="stylesheet" th:href="@{/css/messenger.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Nachrichten</h1>
+    <div class="message-form">
+        <form th:action="@{/messages}" method="post">
+            <label for="recipient">Empfänger:</label>
+            <select id="recipient" name="recipient">
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+            </select>
+            <label for="content">Nachricht:</label>
+            <textarea id="content" name="content"></textarea>
+            <button type="submit">Senden</button>
+        </form>
+    </div>
+    <div class="messages">
+        <h2>Erhaltene Nachrichten</h2>
+        <div th:each="message : ${messages}">
+            <p><strong th:text="${message.sender}">Sender</strong>: <span th:text="${message.content}">Nachricht</span></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

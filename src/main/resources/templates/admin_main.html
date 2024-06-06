@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="/css/admin_main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Main</title>
+    <link rel="stylesheet" th:href="@{/css/admin_main.css}">
 </head>
 <body>
-<h1>Admin Dashboard</h1>
-<div>
-    <a href="/messages">View Messages</a>
-    <a href="/vacation_requests">Vacation Requests</a>
-    <a href="/logout">Logout</a>
+<div class="container">
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/calendar}">Kalender</a></li>
+            <li><a th:href="@{/vacation_requests}">Urlaubsanträge</a></li>
+            <li><a th:href="@{/messages}">Nachrichten</a></li>
+        </ul>
+    </nav>
+    <button onclick="window.location.href='/logout'">Logout</button>
 </div>
 </body>
 </html>

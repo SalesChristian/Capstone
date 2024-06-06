@@ -1,21 +1,23 @@
 package org.example.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Setter
-@Getter
+@Data
 @Document(collection = "messages")
 public class Message {
-
-    // Getters and Setters
     @Id
     private String id;
-    private String senderId;
-    private String receiverId;
+    private String sender;
+    private String recipient;
     private String content;
-    private String recipientId;
 
+    public Message() {}
+
+    public Message(String sender, String recipient, String content) {
+        this.sender = sender;
+        this.recipient = recipient;
+        this.content = content;
+    }
 }

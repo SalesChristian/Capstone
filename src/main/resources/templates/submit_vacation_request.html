@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Vacation Request</title>
+    <link rel="stylesheet" th:href="@{/css/vacation_requests.css}">
+    <!-- Include flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body>
+<h1>Submit Vacation Request</h1>
+<form th:action="@{/vacation_requests/submit}" method="post">
+    <label for="startDate">Start Date:</label>
+    <input type="text" id="startDate" name="startDate" class="date-picker" required>
+    <br>
+    <label for="endDate">End Date:</label>
+    <input type="text" id="endDate" name="endDate" class="date-picker" required>
+    <br>
+    <button type="submit">Submit Request</button>
+</form>
+<script>
+    $(document).ready(function() {
+        $(".date-picker").flatpickr({
+            dateFormat: "Y-m-d"
+        });
+    });
+</script>
+</body>
+</html>

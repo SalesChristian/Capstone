@@ -5,30 +5,26 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
-import org.example.model.User;
-import org.example.model.VacationRequest;
-import org.example.model.Message;
 import org.bson.types.ObjectId;
+import org.example.model.User;
+import org.example.model.Message;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MongoDBManager {
 
     private static final String DATABASE_NAME = "capstone";
-    private static MongoDatabase database;
+    private static final MongoDatabase database;
 
     static {
-        MongoClient client = MongoClients.create("mongodb://localhost:27017");
-        database = client.getDatabase(DATABASE_NAME);
-    }
-    public static void connect() {
-        MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
-        database = mongoClient.getDatabase("capstone");
-    }
-    public static MongoCollection<Document> getUserCollection() {
-        return database.getCollection("users");
+        try (MongoClient client = MongoClients.create("mongodb://localhost:27017")) {
+            database = client.getDatabase(DATABASE_NAME);
+        }
     }
 
-    public static MongoCollection<Document> getVacationRequestCollection() {
-        return database.getCollection("vacationRequests");
+    public static MongoCollection<Document> getUserCollection() {
+        return database.getCollection("users");
     }
 
     public static MongoCollection<Document> getMessageCollection() {
@@ -43,17 +39,6 @@ public class MongoDBManager {
         getUserCollection().insertOne(doc);
     }
 
-    public static void saveVacationRequest(VacationRequest vacationRequest) {
-        Document doc = new Document()
-                .append("startDate", vacationRequest.getStartDate())
-                .append("endDate", vacationRequest.getEndDate());
-        if (vacationRequest.getId() != null) {
-            doc.append("_id", new ObjectId(vacationRequest.getId()));
-        }
-        getVacationRequestCollection().insertOne(doc);
-    }
-
-
     public static void saveMessage(Message message) {
         Document doc = new Document()
                 .append("content", message.getContent());
@@ -62,5 +47,4 @@ public class MongoDBManager {
         }
         getMessageCollection().insertOne(doc);
     }
-
 }
